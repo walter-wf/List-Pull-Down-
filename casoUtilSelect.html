@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>casoUtilSelect!</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h1>A simple exercise to pull a scroll down list</h1>
+    <button id="getCountries">Get all countries</button>
+    <h2>Available countries</h2>
+    <select id='countryList'>
+
+    </select>
+</body>
+
+</html>
+
+<script>
+    $(document).ready(function () {
+        $('#countryList').hide()
+        $("#getCountries").click(function () {
+            const endpoint = "https://restcountries.com/v2/all"
+            $.get(endpoint, function (data, status) {
+                data.forEach(country => {
+                    $('#countryList').html(
+                        `${$('#countryList').html()}
+                        <option value='${country.name}'>${country.name}</option>`
+                    )
+                });
+            })
+            $('#countryList').html('')
+            $('#countryList').show()
+        })
+
+    })
+
+</script>
